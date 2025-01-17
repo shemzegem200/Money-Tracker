@@ -1,0 +1,121 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background: #17181f;
+  color: #ddd;
+  display: flex;
+  justify-content: center;
+}
+
+.outer-container{
+  margin-top: 15px;
+  max-width: 390px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1{
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+
+form{
+  margin-top: 20px;
+}
+
+form input{
+  width: 100%;
+  background: transparent;
+  color: #ddd;
+  border: 2px solid #30313d;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+form input[type="datetime-local"]{
+  color: #777;
+}
+
+.basic{
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+form button{
+  width: 100%;
+  margin-top: 5px;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #ddd;
+  color: black;
+}
+
+
+.transactions{
+  margin-top: 10px;
+}
+
+.transaction{
+  display: flex;
+  padding: 5px 10px;
+  justify-content: space-between;
+  border-top: 1px solid #30313d;
+  border-radius: 5px;
+}
+.transaction:hover{
+  background-color: #353643;
+  cursor: pointer;
+}
+[data-tooltip]::before {
+  /* needed - do not touch */
+  content: attr(data-tooltip);
+  position: absolute;
+  opacity: 0;
+  font-size: 0.8rem;
+
+  /* customizable */
+  transition: all 0.15s ease;
+  padding: 5px;
+  color: black;
+  border-radius: 5px;
+}
+
+[data-tooltip]:hover::before {
+  /* needed - do not touch */
+  opacity: 1;
+
+  /* customizable */
+  background: #9091a1a1;
+  margin-top: -20px;
+  margin-left: 20px;
+}
+.transaction:first-child{
+  border-top: none;
+}
+
+.name{
+  font-size: 1rem;
+}
+
+.description, .datetime{
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.right{
+  text-align: right;
+}
+
+.green{
+  color: #32de84;
+}
+.red{
+  color: #E31837;
+}
