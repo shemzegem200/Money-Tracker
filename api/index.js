@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const config = require("./config.js");
 const cors = require('cors');
 const mongoose = require('mongoose');
 const Transaction = require('./models/Transaction.js');
@@ -45,14 +46,21 @@ app.post('/api/delete-transaction', async(req,res)=>{
 });
 
 
-app.listen(4000, async()=>{
+app.listen(3000, '0.0.0.0', async()=>{
     try{
-        await mongoose.connect('mongodb+srv://shyamvaradharajan200:Gops123!@cluster0.4eyb5bc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
-        console.log('connected to database succesfully');
+        // await mongoose.connect('mongodb+srv://shyamvaradharajan200:Gops123!@cluster0.4eyb5bc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+        mongoose.connect('mongodb+srv://shyamvaradharajan200:Gops123!@cluster0.4eyb5bc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { 
+            useNewUrlParser: true, 
+            useUnifiedTopology: true, 
+            serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+            socketTimeoutMS: 45000 // Increase socket timeout if needed
+          })
+            .then(() => console.log("MongoDB connected"))
+            .catch((err) => console.log("MongoDB connection error: ", err));          
     }
     catch(error){
         console.log('could not connect to database');
-        process.exit(1);
+        // process.exit(1);
     }
-    console.log('server running on port 4000');
+    console.log('server running on port 3000');
 });

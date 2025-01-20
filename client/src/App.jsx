@@ -10,7 +10,8 @@ function App() {
 
 
   useEffect(()=>{
-      fetch('http://localhost:4000/api/transactions').then((res)=>{
+    console.log(import.meta.env.VITE_NODE_API_BACKEND_URL);
+      fetch(import.meta.env.VITE_NODE_API_BACKEND_URL+'/api/transactions').then((res)=>{
         res.json().then(data=>{
           setTransactions(data);
         })
@@ -28,7 +29,7 @@ function App() {
   const handleSubmit = (ev)=>{
     ev.preventDefault();
     const price = name.split(' ')[0];
-    fetch("http://localhost:4000/api/transaction", {
+    fetch(import.meta.env.VITE_NODE_API_BACKEND_URL+"/api/transaction", {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({name: name.substring(price.length+1), price, description, datetime})
@@ -39,7 +40,7 @@ function App() {
         setDatetime('');
         setDescription('');
 
-        fetch('http://localhost:4000/api/transactions').then((res)=>{
+        fetch(import.meta.env.VITE_NODE_API_BACKEND_URL+'/api/transactions').then((res)=>{
           res.json().then(data=>{
             setTransactions(data);
           })
@@ -49,13 +50,13 @@ function App() {
   }
 
   const deleteTransaction = (trn)=>{
-    fetch('http://localhost:4000/api/delete-transaction', {
+    fetch(import.meta.env.VITE_NODE_API_BACKEND_URL+'/api/delete-transaction', {
       method:'POST',
       headers:{'Content-type': 'application/json'},
       body:JSON.stringify(trn)
     }).then(res=>{
        res.json().then(data=>{
-        fetch('http://localhost:4000/api/transactions').then((res)=>{
+        fetch(import.meta.env.VITE_NODE_API_BACKEND_URL+'/api/transactions').then((res)=>{
           res.json().then(data1=>{
             setTransactions(data1);
           })
@@ -70,7 +71,7 @@ function App() {
       <h1>${net}</h1>
       <form onSubmit={handleSubmit}>
         <div className='basic'>
-          <input type='text' placeholder='enter item' value={name} onChange={(ev)=>setName(ev.target.value)}/>
+          <input type='text' placeholder='amount <space> item' value={name} onChange={(ev)=>setName(ev.target.value)}/>
           <input type='datetime-local' value={datetime} onChange={ev => setDatetime(ev.target.value)}/>
         </div>
 
